@@ -1,12 +1,23 @@
-# React + Vite
+# Pubmed Article Explorer App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A proof-of-concept React + TypeScript web app that helps users **search and browse scientific articles** on **Artificial Intelligence in Healthcare** using the [PubMed E-Utilities API](https://github.com/mirbostanicm/pubmed-api/blob/main/README.md).
 
-Currently, two official plugins are available:
+# Getting Started
+Clone the repo
+git clone https://github.com/harshitabeohar/pubmed-article-explorer.git
+cd pubmed-article-explorer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Install dependencies
+npm install
 
-## Expanding the ESLint configuration
+# Run the dev server
+npm run dev
+Open http://localhost:5173 to view the app.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Author
+Harshita Beohar
+GitHub:[@harshitabeohar][https://github.com/harshitabeohar]
+
+# Collaborator
+As required, the following GitHub user has been added as a collaborator:
+@cathythomasdev
