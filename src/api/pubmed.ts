@@ -11,7 +11,7 @@ export const searchPubMed = async (
   filters: { title: string; author: string; journal: string},
   retmax = 10,
   retstart = 0
-): Promise<Article[]> => {
+): Promise<{articles: Article[]; totalCount: number}> => {
   const baseSearchURL = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi`
   const baseFetchURL = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`
 
@@ -27,9 +27,11 @@ export const searchPubMed = async (
   const searchRes = await fetch(searchURL)
   const searchJson = await searchRes.json()
   const pmids = searchJson.esearchresult?.idlist
+  const totalCount: number = parseInt(searchJson.esearchresult?.count || '0')
 
-  if (!pmids || pmids.length === 0) return []
-
+  if (!pmids || pmids.length === 0) {
+    return { articles: [], totalCount }
+  }
   // Step 2: EFetch - to fetch article metadata by PMIDs
   const fetchURL = `${baseFetchURL}?db=pubmed&id=${pmids.join(',')}&retmode=xml`
   const fetchRes = await fetch(fetchURL)
@@ -57,5 +59,5 @@ export const searchPubMed = async (
     }
   })
 
-  return articles
+  return { articles, totalCount }
 }
