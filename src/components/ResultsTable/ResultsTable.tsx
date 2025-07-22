@@ -1,4 +1,4 @@
-import { Article } from "../types/pubmed";
+import { Article } from "../../types/pubmed";
 
 type ResultsTableProps = {
   articles: Article[];
@@ -9,6 +9,7 @@ type ResultsTableProps = {
   onPageChange?: (page: number) => void;
   handleNext: () => void;
   handlePrevious: () => void;
+  totalPages: number;
 };
 
 const ResultsTable: React.FC<ResultsTableProps> = ({
@@ -19,6 +20,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   totalCount,
   handleNext,
   handlePrevious,
+  totalPages
 }) => {
   return (
     <div className="overflow-auto rounded border bg-background shadow">
@@ -73,7 +75,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
           Previous Page
         </button>
         <span className="px-4 py-2 text-sm text-primary">
-          Page {currentPage + 1}
+          Page {currentPage + 1} of {totalPages}
         </span>
         <button
           className="px-4 py-2 rounded-lg text-white bg-primary hover:bg-hover disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed transition hover:-translate-x-1 duration-200"

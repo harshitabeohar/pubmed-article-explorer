@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import FilterSidebar from "./components/FilterSidebar";
-import Header from "./components/Header";
-import ResultsTable from "./components/ResultsTable";
+import FilterSidebar from "./components/FilterSidebar/FilterSidebar";
+import Header from "./components/Header/Header";
+import ResultsTable from "./components/ResultsTable/ResultsTable";
 import { Article } from "./types/pubmed";
-import ArticlePreview from "./components/ArticlePreview";
+import ArticlePreview from "./components/ArticlePreview/ArticlePreview";
 import { searchPubMed } from "./api/pubmed";
-import WelcomePanel from "./components/WelcomePanel";
-import NoResults from "./components/NoResults";
-import LoadingSpinner from "./components/LoadingSpinner";
+import WelcomePanel from "./components/WelcomePanel/WelcomePanel";
+import NoResults from "./components/NoResults/NoResults";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
 function App() {
   const [filters, setFilters] = useState<{
@@ -84,6 +84,7 @@ function App() {
   const showWelcome = !selectedArticle && !hasSearched;
   const showNoResults = !selectedArticle && hasSearched && articles.length === 0;
   const showResults = !selectedArticle && hasSearched && articles.length > 0;
+  const totalPages = Math.ceil(totalCount / articlesPerPage);
 
   return (
     <>
@@ -123,6 +124,7 @@ function App() {
               pageSize={articlesPerPage}
               handleNext={handleNextPage}
               handlePrevious={handlePreviousPage}
+              totalPages={totalPages}
             />
           ) : (
             <ArticlePreview

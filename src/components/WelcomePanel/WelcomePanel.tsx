@@ -7,6 +7,7 @@ const WelcomePanel: React.FC = () => {
       <FaSearch
         className="mx-auto mb-4 h-12 w-12 text-blue-500"
         aria-hidden="true"
+        data-testid="welcome-icon"
       />
       <h2 className="text-2xl font-semibold mb-2">
         Welcome to PubMed Article Explorer
