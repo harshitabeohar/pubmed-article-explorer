@@ -53,7 +53,7 @@ function App() {
 
   const handleNextPage = () => {
     const nextPage = page + 1;
-    if ((nextPage) * articlesPerPage < totalCount) {
+    if (nextPage * articlesPerPage < totalCount) {
       setPage(nextPage);
       fetchArticles(filters, nextPage + 1);
     }
@@ -72,9 +72,9 @@ function App() {
       <div className="sticky top-0 z-50 w-full" role="banner">
         <Header appTitle="PubMed Article Explorer App" />
       </div>
-      <div className="App flex h-screen bg-gray-100">
+      <div className="App flex h-screen">
         <aside
-          className="w-64 bg-white p-4 shadow-md"
+          className="w-64 bg-background p-4 shadow-md ransition-all duration-500 transform translate-x-0"
           aria-label="Filter Sidebar with search filters"
         >
           <FilterSidebar
@@ -83,33 +83,37 @@ function App() {
           />
         </aside>
         <main
-          className="flex-1 p-4"
+          className="flex-1 p-4 opacity-0 animate-fade-in-slow"
           role="main"
           aria-label={selectedArticle ? "Article Preview" : "Results Table"}
         >
           {loading ? (
-            <p
-              className="text-center text-gray-500"
-              role="status"
-              aria-label="polite"
-            >
-              Loading articles...
-            </p>
+            <div className="flex justify-center items-center py-10">
+              <div
+                className="w-6 h-6 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"
+                role="status"
+                aria-label="Loading spinner"
+              ></div>
+            </div>
           ) : !selectedArticle ? (
-            <ResultsTable
-              articles={articles}
-              onArticleClick={setSelectedArticle}
-              currentPage={page}
-              totalCount={totalCount}
-              pageSize={articlesPerPage}
-              handleNext={handleNextPage}
-              handlePrevious={handlePreviousPage}
-            />
+            <div className="transition-all duration-300 ease-in-out">
+              <ResultsTable
+                articles={articles}
+                onArticleClick={setSelectedArticle}
+                currentPage={page}
+                totalCount={totalCount}
+                pageSize={articlesPerPage}
+                handleNext={handleNextPage}
+                handlePrevious={handlePreviousPage}
+              />
+            </div>
           ) : (
-            <ArticlePreview
-              article={selectedArticle}
-              onClose={() => setSelectedArticle(null)}
-            />
+            <div className="animate-fade-in">
+              <ArticlePreview
+                article={selectedArticle}
+                onClose={() => setSelectedArticle(null)}
+              />
+            </div>
           )}
         </main>
       </div>

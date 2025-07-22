@@ -1,15 +1,35 @@
-import React from 'react'
+import React from "react";
 
 type HeaderProps = {
-    appTitle?: string;
+  appTitle?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({appTitle = "PubMed Article Explorer App"}) => {
+const Header: React.FC<HeaderProps> = ({
+  appTitle = "PubMed Article Explorer App",
+}) => {
   return (
-    <header className="bg-blue-600 text-white px-6 py-4 shadow-md" role="banner">
-      <h1 className="text-xl font-semibold" tabIndex={0}>{appTitle}</h1>
+    <header
+      className="bg-primary text-white px-6 py-4 shadow-md flex items-center justify-between w-full"
+      role="banner"
+      aria-label="Header with app title and login button"
+    >
+      <h1
+        className="text-xl font-bold tracking-tight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+        tabIndex={0}
+      >
+        {appTitle}
+      </h1>
+      <div className="flex items-center flex justify-end">
+        <button
+          className="bg-background text-primary font-semibold px-4 py-2 rounded hover:bg-blue-100 transition ocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-200"
+          aria-label="Login to your account"
+          onClick={() => alert("Login functionality not implemented yet")}
+        >
+          Login
+        </button>
+      </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
