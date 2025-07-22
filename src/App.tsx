@@ -6,6 +6,9 @@ import ResultsTable from "./components/ResultsTable";
 import { Article } from "./types/pubmed";
 import ArticlePreview from "./components/ArticlePreview";
 import { searchPubMed } from "./api/pubmed";
+import WelcomePanel from "./components/WelcomePanel";
+import NoResults from "./components/NoResults";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   const [filters, setFilters] = useState<{
@@ -22,6 +25,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [hasSearched, setHasSearched] = useState(false);
   const articlesPerPage = 10;
 
   const fetchArticles = async (
@@ -48,6 +52,7 @@ function App() {
   const handleApplyFilters = async (newFilters: typeof filters) => {
     setFilters(newFilters);
     setPage(0);
+    setHasSearched(true);
     await fetchArticles(newFilters, 1);
   };
 
@@ -67,10 +72,26 @@ function App() {
     }
   };
 
+  const handleResetSearch = () => {
+    setFilters({ title: "", author: "", journal: "" });
+    setArticles([]);
+    setSelectedArticle(null);
+    setHasSearched(false);
+    setPage(0);
+    setTotalCount(0);
+  };
+
+  const showWelcome = !selectedArticle && !hasSearched;
+  const showNoResults = !selectedArticle && hasSearched && articles.length === 0;
+  const showResults = !selectedArticle && hasSearched && articles.length > 0;
+
   return (
     <>
       <div className="sticky top-0 z-50 w-full" role="banner">
-        <Header appTitle="PubMed Article Explorer App" />
+        <Header
+          appTitle="PubMed Article Explorer App"
+          onResetSearch={handleResetSearch}
+        />
       </div>
       <div className="App flex h-screen">
         <aside
@@ -88,32 +109,26 @@ function App() {
           aria-label={selectedArticle ? "Article Preview" : "Results Table"}
         >
           {loading ? (
-            <div className="flex justify-center items-center py-10">
-              <div
-                className="w-6 h-6 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"
-                role="status"
-                aria-label="Loading spinner"
-              ></div>
-            </div>
-          ) : !selectedArticle ? (
-            <div className="transition-all duration-300 ease-in-out">
-              <ResultsTable
-                articles={articles}
-                onArticleClick={setSelectedArticle}
-                currentPage={page}
-                totalCount={totalCount}
-                pageSize={articlesPerPage}
-                handleNext={handleNextPage}
-                handlePrevious={handlePreviousPage}
-              />
-            </div>
+            <LoadingSpinner />
+          ) : showWelcome ? (
+            <WelcomePanel />
+          ) : showNoResults ? (
+            <NoResults />
+          ) : showResults ? (
+            <ResultsTable
+              articles={articles}
+              onArticleClick={setSelectedArticle}
+              currentPage={page}
+              totalCount={totalCount}
+              pageSize={articlesPerPage}
+              handleNext={handleNextPage}
+              handlePrevious={handlePreviousPage}
+            />
           ) : (
-            <div className="animate-fade-in">
-              <ArticlePreview
-                article={selectedArticle}
-                onClose={() => setSelectedArticle(null)}
-              />
-            </div>
+            <ArticlePreview
+              article={selectedArticle}
+              onClose={() => setSelectedArticle(null)}
+            />
           )}
         </main>
       </div>

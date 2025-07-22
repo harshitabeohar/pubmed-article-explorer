@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type FilterSidebarProps = {
   filters: {
@@ -21,9 +21,17 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   const [author, setAuthor] = useState(filters.author);
   const [journal, setJournal] = useState(filters.journal);
 
+  const isApplyFiltersDisabled = !title && !author && !journal;
+
   const handleApplyFilters = () => {
     onApplyFilters({ title, author, journal });
   };
+
+  useEffect(() => {
+    setTitle(filters.title);
+    setAuthor(filters.author);
+    setJournal(filters.journal);
+  }, [filters]);
 
   return (
     <aside
@@ -70,7 +78,13 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       </div>
       <button
         onClick={handleApplyFilters}
-        className="w-full bg-primary text-white font-medium py-2 rounded-md shadow hover:bg-hover hover:scale-105 active:scale-95"
+        disabled={isApplyFiltersDisabled}
+        className={`w-full font-medium py-2 rounded-md shadow
+          ${
+            isApplyFiltersDisabled
+              ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+              : "bg-primary text-white hover:bg-hover hover:scale-105 active:scale-95"
+          }`}
         aria-label="Apply Selected Filters Button"
       >
         Apply Filters
