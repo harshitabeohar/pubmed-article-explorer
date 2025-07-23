@@ -1,4 +1,4 @@
-import { Article } from "../types/pubmed";
+import { Article } from '../../types/pubmed'
 
 type ArticlePreviewProps = {
   article: Article | null;

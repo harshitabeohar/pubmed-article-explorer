@@ -7,4 +7,4 @@ export type Article = {
     abstract?: string;
     doi?: string;
     pages?: string;
-}
+};
