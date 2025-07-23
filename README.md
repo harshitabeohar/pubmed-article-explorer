@@ -3,7 +3,8 @@
 A proof-of-concept React + TypeScript web app that helps users **search and browse scientific articles** on **Artificial Intelligence in Healthcare** using the [PubMed E-Utilities API](https://github.com/mirbostanicm/pubmed-api/blob/main/README.md).
 
 ## Preview
-![App Screenshot](assets/preview.png)
+
+![App Screenshot](src/assets/preview.png)
 
 ## Getting Started
 ### Clone the repository
