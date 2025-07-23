@@ -23,7 +23,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   totalPages
 }) => {
   return (
-    <div className="overflow-auto rounded border bg-background shadow">
+    <div className="overflow-auto rounded border bg-background shadow inline-block align-middle">
       <table className="min-w-full text-sm text-left border-collapse">
         <thead className="bg-blue-200 text-primary">
           <tr>
@@ -42,22 +42,22 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
               onClick={() => onArticleClick(article)}
               className="cursor-pointer hover:bg-blue-50"
             >
-              <td className="border-t px-4 py-2 text-blue-600 underline">
+              <td className="border-t px-4 py-2 text-blue-600 underline white-space-nowrap">
                 {article.title}
               </td>
-              <td className="border-t px-4 py-2 text-primary">
+              <td className="border-t px-4 py-2 text-primary white-space-nowrap">
                 {article.authors.join(", ")}
               </td>
-              <td className="border-t px-4 py-2 text-primary">
+              <td className="border-t px-4 py-2 text-primary white-space-nowrap">
                 {article.journal}
               </td>
-              <td className="border-t px-4 py-2 text-primary">
+              <td className="border-t px-4 py-2 text-primary white-space-nowrap">
                 {article.year}
               </td>
-              <td className="border-t px-4 py-2 text-primary">
+              <td className="border-t px-4 py-2 text-primary white-space-nowrap">
                 {article.doi || "-"}
               </td>
-              <td className="border-t px-4 py-2 text-primary">
+              <td className="border-t px-4 py-2 text-primary white-space-nowrap">
                 {article.pages || "-"}
               </td>
             </tr>
@@ -65,7 +65,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
         </tbody>
       </table>
 
-      <div className="flex justify-center gap-4 mt-6 p-4">
+      <div className="flex flex-wrap justify-center gap-4 mt-6 p-4">
         <button
           className="px-4 py-2 rounded-lg text-white bg-primary hover:bg-hover disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed transition hover:-translate-x-1 duration-200"
           onClick={handlePrevious}

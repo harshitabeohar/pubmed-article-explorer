@@ -48,6 +48,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
           Title
         </label>
         <input
+          id="title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -59,6 +60,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
           Author
         </label>
         <input
+          id="author"
           type="text"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
@@ -70,6 +72,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
           Journal
         </label>
         <input
+          id="journal"
           type="text"
           value={journal}
           onChange={(e) => setJournal(e.target.value)}
@@ -85,7 +88,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
               ? "bg-gray-400 text-gray-600 cursor-not-allowed"
               : "bg-primary text-white hover:bg-hover hover:scale-105 active:scale-95"
           }`}
-        aria-label="Apply Selected Filters Button"
       >
         Apply Filters
       </button>
